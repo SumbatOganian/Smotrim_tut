@@ -4,7 +4,7 @@
   >
     <!-- Close button -->
     <button
-      @click="close"
+      @click="store.isAuthClosed=false"
       class="cursor-pointer absolute right-6 top-5 z-10 text-3xl text-[#aaaab7] transition hover:scale-110 hover:text-white"
     >
       ×
@@ -38,7 +38,7 @@
             </label>
 
             <input
-              v-model="registerName"
+              v-model="registerData.registerName"
               type="text"
               placeholder="Например, Sumbat"
               class="w-full cursor-pointer rounded-2xl border border-[#2c2c38] bg-[#161620] px-5 py-4 text-white outline-none transition placeholder:text-[#8f8f9d] focus:border-[#7c3aed] focus:bg-[#1b1b27]"
@@ -51,7 +51,7 @@
             </label>
 
             <input
-              v-model="registerEmail"
+              v-model="registerData.registerEmail"
               type="email"
               placeholder="example@mail.com"
               class="w-full cursor-pointer rounded-2xl border border-[#2c2c38] bg-[#161620] px-5 py-4 text-white outline-none transition placeholder:text-[#8f8f9d] focus:border-[#7c3aed] focus:bg-[#1b1b27]"
@@ -64,7 +64,7 @@
             </label>
 
             <input
-              v-model="registerPassword"
+              v-model="registerData.registerPassword"
               type="password"
               placeholder="Придумайте пароль"
               class="w-full cursor-pointer rounded-2xl border border-[#2c2c38] bg-[#161620] px-5 py-4 text-white outline-none transition placeholder:text-[#8f8f9d] focus:border-[#7c3aed] focus:bg-[#1b1b27]"
@@ -72,6 +72,7 @@
           </div>
 
           <button
+            @click="data"
             type="submit"
             class="w-full cursor-pointer rounded-2xl bg-[#7c3aed] py-4 font-semibold text-white transition hover:bg-[#8b5cf6] active:bg-[#6d28d9]"
           >
@@ -163,16 +164,24 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, reactive } from 'vue'
+import { useStore } from '@/stores/counter';
 
-const emit = defineEmits(['close'])
+const store = useStore()
 
-const registerName = ref('')
-const registerEmail = ref('')
-const registerPassword = ref('')
 
-const loginEmail = ref('')
-const loginPassword = ref('')
+
+const registerData = reactive({
+  registerName: "",
+  registerEmail: "",
+  registerPassword: "",
+})
+
+
+const loginEmail = ref('');
+const loginPassword = ref('');
+
+
 
 function close() {
   emit('close')
@@ -180,9 +189,9 @@ function close() {
 
 function register() {
   console.log('Регистрация:', {
-    name: registerName.value,
-    email: registerEmail.value,
-    password: registerPassword.value
+    name: registerData.registerName,
+    email: registerData.registerEmail,
+    password: registerData.registerPassword
   })
 }
 
@@ -192,4 +201,5 @@ function login() {
     password: loginPassword.value
   })
 }
+
 </script>

@@ -5,17 +5,17 @@
     </div>
 
     <div class="w-full flex-1">
-      <Header @open-auth="isAuthModalOpen = true" />
+      <Header  />
       <RouterView />
     </div>
 
 
 
     <div
-      v-if="isAuthModalOpen"
+      v-if="store.isAuthClosed"
       class="fixed inset-0 z-50 flex items-center justify-center bg-[#101018]/90"
     >
-      <Registration  @close="isAuthModalOpen = false" />
+      <Registration/>
     </div>
   </div>
 </template>
@@ -26,6 +26,8 @@ import Sidebar from "./components/Sidebar.vue";
 import Registration from "./views/Registration.vue";
 import { ref } from "vue";
 
-const isAuthModalOpen = ref(false);
+import { useStore } from '@/stores/counter';
+
+const store = useStore()
 
 </script>

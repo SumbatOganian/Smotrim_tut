@@ -22,7 +22,7 @@
         />
       </div>
       <div
-        @click="openAuthModal"
+        @click="store.isAuthClosed=true"
         class="w-15 cursor-pointer overflow-hidden rounded-full border border-[#2c2c38] transition-all duration-500 hover:scale-110"
       >
         <img  :src="profile_photo" alt="" class="" />
@@ -35,11 +35,11 @@
 import search from "../assets/Icons/Header_Icons/search.png";
 import notify from "../assets/Icons/Header_Icons/notify.png";
 import profile_photo from "../assets/Pictures/Profile/profile_photo.png";
-const emit = defineEmits(['open-auth'])
 
-function openAuthModal() {
-  emit('open-auth')
-}
+import { useStore } from '@/stores/counter';
+
+const store = useStore()
+
 
 
 </script>
